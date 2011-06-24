@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -9,7 +9,8 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>vsts</RootNamespace>
     <AssemblyName>vsts</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <StartupObject>vsts.MainClass</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +53,7 @@
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>atk-sharp-2.0</Package>
     </Reference>
+    <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -60,10 +62,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="MainWindow.cs" />
-    <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="GUI\MainWindow.cs" />
+    <Compile Include="model\IVehicle.cs" />
+    <Compile Include="model\SimpleCar.cs" />
+    <Compile Include="model\SimplePath.cs" />
+    <Compile Include="model\Path.cs" />
+    <Compile Include="model\TerminatorPath.cs" />
+    <Compile Include="model\SourcePath.cs" />
+    <Compile Include="GUI\TrafficControl.cs" />
+    <Compile Include="gtk-gui\vsts.MainWindow.cs" />
+    <Compile Include="model\UpdateThread.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="GUI\" />
+    <Folder Include="model\" />
+  </ItemGroup>
 </Project>
