@@ -12,7 +12,14 @@ namespace vsts
 		public double MinDistance { get; set; }
 		public double Acceleration { get; set; }
 		
+		public string Name { get; set; }
+		
 		public double LookAhead { get { return MinDistance; } }
+		
+		public void SetRunning()
+		{
+			actSpeed = MaxSpeed;
+		}
 		
 		public double Drive(double time, double obstacleDistance)
 		{

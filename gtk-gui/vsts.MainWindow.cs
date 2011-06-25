@@ -8,6 +8,8 @@ namespace vsts
 
 		private global::vsts.TrafficControl trafficcontrol1;
 
+		private global::Gtk.Button button1;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -25,6 +27,17 @@ namespace vsts
 			this.vbox1.Add (this.trafficcontrol1);
 			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.trafficcontrol1]));
 			w1.Position = 0;
+			// Container child vbox1.Gtk.Box+BoxChild
+			this.button1 = new global::Gtk.Button ();
+			this.button1.CanFocus = true;
+			this.button1.Name = "button1";
+			this.button1.UseUnderline = true;
+			this.button1.Label = global::Mono.Unix.Catalog.GetString ("GtkButton");
+			this.vbox1.Add (this.button1);
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.button1]));
+			w2.Position = 1;
+			w2.Expand = false;
+			w2.Fill = false;
 			this.Add (this.vbox1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

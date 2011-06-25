@@ -15,18 +15,18 @@ namespace vsts
 		{ 
 			get { return trafficcontrol1; } 
 		}
-//		
-//		public event ButtonPressEventHandler ButtonPressed
-//		{
-//			add	{ button1.ButtonPressEvent += value; }
-//			remove { button1.ButtonPressEvent -= value; }
-//		}
+		
+		public event EventHandler ButtonClicked
+		{
+			add	{ button1.Clicked += value; }
+			remove { button1.Clicked -= value; }
+		}
 			
 		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 		{
 			Application.Quit ();
 			a.RetVal = true;
-		}
+		}		
 	}
 
 }

@@ -12,6 +12,8 @@ namespace vsts
 		/// Distance on front of the vehicle that should be known.
 		/// </summary>
 		double LookAhead { get; }
+
+		string Name { get; set; }
 		
 		/// <summary>
 		/// Simulates driving the vehicle for specified <paramref name="time"/> 
