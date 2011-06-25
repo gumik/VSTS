@@ -3,7 +3,8 @@ namespace vsts
 {
 	public interface IOutChooser
 	{
-		int Choose();
+		uint OutsNum { get; }
+		uint Choose();
 	}
 }
 

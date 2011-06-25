@@ -5,7 +5,7 @@ namespace vsts
 {
 	public abstract class Path
 	{
-		protected Path(int outputPathsNum, double length)
+		protected Path(uint outputPathsNum, double length)
 		{
 			this.length = length;
 			outputPaths = new Path[outputPathsNum];

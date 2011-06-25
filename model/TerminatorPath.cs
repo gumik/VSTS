@@ -9,7 +9,7 @@ namespace vsts
 		
 		public override double ObstacleDistance(double lookAhead)
 		{
-			return 0;
+			return lookAhead;
 		}
 		
 		public override void PreGo(double time)

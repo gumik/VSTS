@@ -5,9 +5,10 @@ namespace vsts
 {
 	public class MultiOutPath : Path
 	{
-		public MultiOutPath (double length, int outs) : base(outs, length)
+		public MultiOutPath (double length, IOutChooser outChooser) : base(outChooser.OutsNum, length)
 		{
-			
+			this.outChooser = outChooser;
+			nextOut = outChooser.Choose();
 		}
 		
 		public override double ObstacleDistance(double lookAhead)
@@ -19,7 +20,7 @@ namespace vsts
 			}
 			else if (lookAhead > length)
 			{
-				return outputPaths[0].ObstacleDistance(lookAhead - length);
+				return outputPaths[nextOut].ObstacleDistance(lookAhead - length);
 			}
 			else
 			{
@@ -45,7 +46,7 @@ namespace vsts
 					}
 					else
 					{
-						toGo.AddLast(length - position + outputPaths[0].ObstacleDistance(lookAhead - (length - position)));
+						toGo.AddLast(length - position + outputPaths[nextOut].ObstacleDistance(lookAhead - (length - position)));
 					}
 				}
 				else
@@ -59,11 +60,10 @@ namespace vsts
 		
 		public override void Go()
 		{
-			//Console.WriteLine("time: " + toGoTime);
 			IEnumerator<IVehicle> vehicleEn = vehicles.GetEnumerator();
 			IEnumerator<double> toGoEn = toGo.GetEnumerator();
 			
-			var toRemove = 0;
+			var toOut = new List<Tuple<IVehicle, double, uint>>();
 			while (vehicleEn.MoveNext() && toGoEn.MoveNext())
 			{
 				var vehicle = vehicleEn.Current;
@@ -73,22 +73,24 @@ namespace vsts
 				if (newPosition <= length)
 				{
 					vehiclePosition[vehicle] = newPosition;
-					//Console.WriteLine(vehicle + " " + newPosition);
 				}
 				else 
 				{
-					outputPaths[0].AddVehicle(vehicle, newPosition - length);
-					++toRemove;
-					//RemoveVehicle(0);
-					//Console.WriteLine("end " + (newPosition - length));
+					toOut.Add(new Tuple<IVehicle, double, uint>(vehicle, newPosition - length, nextOut));
+					nextOut = outChooser.Choose();
 				}
 			}
 			
 			toGoEn = null;
 			
-			for (int i = 0; i < toRemove; ++i)
+			foreach (var t in toOut)
 			{
-				RemoveVehicle(0);
+				var vehicle = t.Item1;
+				var position = t.Item2;
+				var output = t.Item3;
+				
+				RemoveVehicle(output);
+				outputPaths[output].AddVehicle(vehicle, position);
 			}
 		}
 		
@@ -107,6 +109,8 @@ namespace vsts
 		
 		private LinkedList<double> toGo;
 		private double toGoTime;
+		private uint nextOut;
+		private IOutChooser outChooser;
 	}
 }
 

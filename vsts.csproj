@@ -54,6 +54,7 @@
       <Package>atk-sharp-2.0</Package>
     </Reference>
     <Reference Include="Mono.Cairo" />
+    <Reference Include="System.Data.Linq" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -79,6 +80,7 @@
     <Compile Include="model\MultiOutPath.cs" />
     <Compile Include="model\IOutChooser.cs" />
     <Compile Include="model\StandardOutChooser.cs" />
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

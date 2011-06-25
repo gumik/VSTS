@@ -13,39 +13,37 @@ namespace vsts
 			MainWindow win = new MainWindow ();
 			
 			
-			var path = new SimplePath(50);
+			var path = new MultiOutPath(50, new StandardOutChooser(0.3, 0.3, 0.3));
+			var path1 = new SimplePath(50);
 			var path2 = new SimplePath(50);
 			var path3 = new SimplePath(50);
-			var path4 = new SimplePath(50);
+			//var path4 = new SimplePath(50);
 			var sp = new SourcePath(10, new SimpleCarFactory() { }) { AddTime = 1 };
+			var termPath = new TerminatorPath();
 			
-//			var rand = new Random();
-//			for (int i = 45; i >= 0; --i) 
-//			{
-//				path2.AddVehicle(new SimpleCar() { Acceleration = rand.NextDouble() * 5 + 1, Length = 1, MaxSpeed = rand.NextDouble() * 2 + 4, MinDistance = 2 }, i);
-//			}
+			//car = new SimpleCar() { Acceleration = 1, Length = 1, MaxSpeed = 0, MinDistance = 1 };
+			//path.AddVehicle(car, 10);
 			
-			car = new SimpleCar() { Acceleration = 1, Length = 1, MaxSpeed = 0, MinDistance = 1 };
-			path.AddVehicle(car, 10);
-			
-			//var termPath = new TerminatorPath();
 			sp.OutputPaths[0] = path;
-			path.OutputPaths[0] = path2;
-			path2.OutputPaths[0] = path3;
-			path3.OutputPaths[0] = path4;
-			path4.OutputPaths[0] = path;
+			path.OutputPaths[0] = path1;
+			path.OutputPaths[1] = path2;
+			path.OutputPaths[2] = path3;
+			path1.OutputPaths[0] = termPath;
+			path2.OutputPaths[0] = termPath;
+			path3.OutputPaths[0] = termPath;
 			
 			var th = new UpdateThread() { SleepTime = 32 };
 			th.AddPath(sp);
 			th.AddPath(path);
+			th.AddPath(path1);
 			th.AddPath(path2);
 			th.AddPath(path3);
-			th.AddPath(path4);
+			th.AddPath(termPath);
 			
-			win.TrafficControl.AddPath(path, 100, 100, 1000, 100);
-			win.TrafficControl.AddPath(path2, 1000, 100, 1000, 1000);
-			win.TrafficControl.AddPath(path3, 1000, 1000, 100, 1000);
-			win.TrafficControl.AddPath(path4, 100, 1000, 100, 100);
+			win.TrafficControl.AddPath(path, 100, 100, 500, 100);
+			win.TrafficControl.AddPath(path1, 500, 100, 500, 600);
+			win.TrafficControl.AddPath(path2, 500, 100, 1000, 100);
+			win.TrafficControl.AddPath(path3, 500, 100, 800, 800);
 			win.TrafficControl.AddPath(sp, 0, 0, 100, 100);
 			
 			th.Tick += delegate
