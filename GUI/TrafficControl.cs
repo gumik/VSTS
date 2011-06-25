@@ -43,6 +43,19 @@ namespace vsts
 				var begin = pPosition.Item1;
 				var end = pPosition.Item2;
 				
+				cr.SetSourceRGB(1, 1, 1);
+				cr.MoveTo(begin.X, begin.Y);
+				cr.LineTo(end.X, end.Y);
+				cr.Stroke();
+				cr.SetSourceRGB(0, 0, 0);
+			}
+			
+			foreach (var path in pathPosition.Keys)
+			{
+				var pPosition = pathPosition[path];
+				var begin = pPosition.Item1;
+				var end = pPosition.Item2;
+				
 				if (path is BlockingPath)
 				{
 					var blockingPath = path as BlockingPath;

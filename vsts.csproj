@@ -83,6 +83,7 @@
     <Compile Include="model\BlockingPath.cs" />
     <Compile Include="model\lights\LightSystem.cs" />
     <Compile Include="model\lights\LightGroup.cs" />
+    <Compile Include="model\TestCarFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
