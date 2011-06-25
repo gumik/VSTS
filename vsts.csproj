@@ -80,12 +80,14 @@
     <Compile Include="model\MultiOutPath.cs" />
     <Compile Include="model\IOutChooser.cs" />
     <Compile Include="model\StandardOutChooser.cs" />
-    <Compile Include="Test.cs" />
     <Compile Include="model\BlockingPath.cs" />
+    <Compile Include="model\lights\LightSystem.cs" />
+    <Compile Include="model\lights\LightGroup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="GUI\" />
     <Folder Include="model\" />
+    <Folder Include="model\lights\" />
   </ItemGroup>
 </Project>

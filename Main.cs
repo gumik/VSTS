@@ -30,6 +30,10 @@ namespace vsts
 //			path2.OutputPaths[0] = termPath;
 //			path3.OutputPaths[0] = termPath;
 			
+			var group = new LightGroup(true, 5, 5);
+			group.AddPath(path);
+			var system = new LightSystem(10, group);
+			
 			var th = new UpdateThread() { SleepTime = 32 };
 			th.AddPath(sp);
 			th.AddPath(path);
@@ -37,6 +41,8 @@ namespace vsts
 //			th.AddPath(path2);
 //			th.AddPath(path3);
 			th.AddPath(termPath);
+			
+			th.AddLightSystem(system);
 			
 			win.TrafficControl.AddPath(path, 100, 100, 500, 100);
 			win.TrafficControl.AddPath(path1, 500, 100, 900, 100);

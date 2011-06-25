@@ -9,6 +9,7 @@ namespace vsts
 		public UpdateThread ()
 		{
 			paths = new List<Path>();
+			systems = new List<LightSystem>();
 		}
 		
 		public int SleepTime { get; set; }
@@ -18,9 +19,13 @@ namespace vsts
 			paths.Add(path);
 		}
 		
+		public void AddLightSystem(LightSystem system)
+		{
+			systems.Add(system);
+		}
+		
 		public void Start()
 		{
-			//lastTick = DateTime.Now;
 			run = true;
 			thread = new Thread(new ThreadStart(ThreadMethod));
 			thread.Start();
@@ -44,6 +49,11 @@ namespace vsts
 		
 		internal void TickMethod(double time)
 		{
+			foreach (var system in systems)
+			{
+				system.Tick(time);
+			}
+			
 			foreach (var path in paths)
 			{
 				path.PreGo(time);
@@ -58,6 +68,7 @@ namespace vsts
 		}
 		
 		private List<Path> paths;
+		private List<LightSystem> systems;
 		private bool run;
 		private Thread thread;
 	}
