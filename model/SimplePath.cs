@@ -105,7 +105,7 @@ namespace vsts
 			vehiclePosition.Remove(vehicle);
 		}
 		
-		private LinkedList<double> toGo;
-		private double toGoTime;
+		protected LinkedList<double> toGo;
+		protected double toGoTime;
 	}
 }

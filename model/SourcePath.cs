@@ -18,20 +18,38 @@ namespace vsts
 			if (lastAddTime >= AddTime) 
 			{
 				lastAddTime = 0;
+				++toAdd;
 			}
 		}
 		
 		public override void Go ()
 		{
 			base.Go();
-			if (lastAddTime == 0)
+			if (toAdd > 0)
 			{
-				var vehicle = factory.CreateVehicle();
-				AddVehicle(vehicle, 0);
+				var vehicle = null as IVehicle;
+				if (toAddVehicle == null)
+				{
+					vehicle = factory.CreateVehicle();
+				}
+				else
+				{
+					vehicle = toAddVehicle;
+				}
+				
+				if (vehicles.Count == 0 
+				    || vehiclePosition[vehicles.Last.Value] - vehicles.Last.Value.Length >= 0)
+				{
+					AddVehicle(vehicle, 0);
+					toAddVehicle = null;
+					--toAdd;
+				}
 			}
 		}
 		
 		private double lastAddTime;
+		private uint toAdd;
+		private IVehicle toAddVehicle;
 		private IVehicleFactory factory;
 	}
 }

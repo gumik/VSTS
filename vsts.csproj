@@ -81,6 +81,7 @@
     <Compile Include="model\IOutChooser.cs" />
     <Compile Include="model\StandardOutChooser.cs" />
     <Compile Include="Test.cs" />
+    <Compile Include="model\BlockingPath.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

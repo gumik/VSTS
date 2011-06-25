@@ -43,6 +43,24 @@ namespace vsts
 				var begin = pPosition.Item1;
 				var end = pPosition.Item2;
 				
+				if (path is BlockingPath)
+				{
+					var blockingPath = path as BlockingPath;
+					
+					if (blockingPath.IsBlocked)
+					{
+						cr.SetSourceRGB(1, 0, 0);
+					}
+					else
+					{
+						cr.SetSourceRGB(0, 1, 0);
+					}
+					
+					cr.Rectangle(new Cairo.Rectangle(end.X - 6, end.Y - 6, 12, 12));
+					cr.Fill();
+					cr.SetSourceRGB(0, 0, 0);
+				}
+				
 				foreach (var vehicle in path.VehiclePosition.Keys)
 				{
 					var position = path.VehiclePosition[vehicle];
