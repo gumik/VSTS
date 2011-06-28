@@ -229,8 +229,10 @@ namespace vsts
 			th.AddLightSystem(system);
 			
 			var x = 200;
-			var y = 200;
+			var y = 500;
 			var gunit = 15;
+			
+			// Down
 			win.TrafficControl.AddPath(sourceDown, x + 1 * gunit, y + 15 * gunit, x + 1 * gunit, y + 12 * gunit);
 			win.TrafficControl.AddPath(multiDown, x + 1 * gunit, y + 12 * gunit, x + 1 * gunit, y + 10 * gunit);
 			win.TrafficControl.AddPath(preLeftDown, x + 1 * gunit, y + 10 * gunit, x + 0 * gunit, y + 8 * gunit);
@@ -244,6 +246,51 @@ namespace vsts
 			win.TrafficControl.AddPath(post2MiddleDown, x + 1 * gunit, y + -2 * gunit, x + 1 * gunit, y + -4 * gunit);
 			win.TrafficControl.AddPath(post3MiddleDown, x + 1 * gunit, y + -4 * gunit, x + 1 * gunit, y + -15 * gunit);
 			win.TrafficControl.AddPath(postRightDown, x + 2 * gunit, y + 3 * gunit, x + 4 * gunit, y + 1 * gunit);
+			
+			// Up
+			win.TrafficControl.AddPath(sourceUp, x + -1 * gunit, y + -15 * gunit, x + -1 * gunit, y + -12 * gunit);
+			win.TrafficControl.AddPath(multiUp, x + -1 * gunit, y + -12 * gunit, x + -1 * gunit, y + -10 * gunit);
+			win.TrafficControl.AddPath(preLeftUp, x + -1 * gunit, y + -10 * gunit, x + 0 * gunit, y + -8 * gunit);
+			win.TrafficControl.AddPath(preRightUp, x + -1 * gunit, y + -10 * gunit, x + -2 * gunit, y + -8 * gunit);
+			win.TrafficControl.AddPath(leftUp, x + 0 * gunit, y + -8 * gunit, x + 0 * gunit, y + -3 * gunit);
+			win.TrafficControl.AddPath(middleUp, x + -1 * gunit, y + -10 * gunit, x + -1 * gunit, y + -3 * gunit);
+			win.TrafficControl.AddPath(rightUp, x + -2 * gunit, y + -8 * gunit, x + -2 * gunit, y + -3 * gunit);
+			win.TrafficControl.AddPath(post1LeftUp, x + 0 * gunit, y + -3 * gunit, x + 0 * gunit, y + -1 * gunit);
+			win.TrafficControl.AddPath(post2LeftUp, x + 0 * gunit, y + -1 * gunit, x + 2 * gunit, y + 1 * gunit);
+			win.TrafficControl.AddPath(post1MiddleUp, x + -1 * gunit, y + -3 * gunit, x + -1 * gunit, y + 2 * gunit);
+			win.TrafficControl.AddPath(post2MiddleUp, x + -1 * gunit, y + 2 * gunit, x + -1 * gunit, y + 4 * gunit);
+			win.TrafficControl.AddPath(post3MiddleUp, x + -1 * gunit, y + 4 * gunit, x + -1 * gunit, y + 15 * gunit);
+			win.TrafficControl.AddPath(postRightUp, x + -2 * gunit, y + -3 * gunit, x + -4 * gunit, y + -1 * gunit);
+			
+			// Left
+			win.TrafficControl.AddPath(sourceLeft, x + -15 * gunit, y + 1 * gunit, x + -12 * gunit, y + 1 * gunit);
+			win.TrafficControl.AddPath(multiLeft, x + -12 * gunit, y + 1 * gunit, x + -10 * gunit, y + 1 * gunit);
+			win.TrafficControl.AddPath(preLeftLeft, x + -10 * gunit, y + 1 * gunit, x + -8 * gunit, y + 0 * gunit);
+			win.TrafficControl.AddPath(preRightLeft, x + -10 * gunit, y + 1 * gunit, x + -8 * gunit, y + 2 * gunit);
+			win.TrafficControl.AddPath(leftLeft, x + -8 * gunit, y + 0 * gunit, x + -3 * gunit, y + 0 * gunit);
+			win.TrafficControl.AddPath(middleLeft, x + -10 * gunit, y + 1 * gunit, x + -3 * gunit, y + 1 * gunit);
+			win.TrafficControl.AddPath(rightLeft, x + -8 * gunit, y + 2 * gunit, x + -3 * gunit, y + 2 * gunit);
+			win.TrafficControl.AddPath(post1LeftLeft, x + -3 * gunit, y + 0 * gunit, x + -1 * gunit, y + 0 * gunit);
+			win.TrafficControl.AddPath(post2LeftLeft, x + -1 * gunit, y + 0 * gunit, x + 1 * gunit, y + -2 * gunit);
+			win.TrafficControl.AddPath(post1MiddleLeft, x + -3 * gunit, y + 1 * gunit, x + 2 * gunit, y + 1 * gunit);
+			win.TrafficControl.AddPath(post2MiddleLeft, x + 2 * gunit, y + 1 * gunit, x + 4 * gunit, y + 1 * gunit);
+			win.TrafficControl.AddPath(post3MiddleLeft, x + 4 * gunit, y + 1 * gunit, x + 15 * gunit, y + 1 * gunit);
+			win.TrafficControl.AddPath(postRightLeft, x + -3 * gunit, y + 2 * gunit, x + -1 * gunit, y + 4 * gunit);
+			
+			// Right
+			win.TrafficControl.AddPath(sourceRight, x + 15 * gunit, y + -1 * gunit, x + 12 * gunit, y + -1 * gunit);
+			win.TrafficControl.AddPath(multiRight, x + 12 * gunit, y + -1 * gunit, x + 10 * gunit, y + -1 * gunit);
+			win.TrafficControl.AddPath(preLeftRight, x + 10 * gunit, y + -1 * gunit, x + 8 * gunit, y + 0 * gunit);
+			win.TrafficControl.AddPath(preRightRight, x + 10 * gunit, y + -1 * gunit, x + 8 * gunit, y + -2 * gunit);
+			win.TrafficControl.AddPath(leftRight, x + 8 * gunit, y + 0 * gunit, x + 3 * gunit, y + 0 * gunit);
+			win.TrafficControl.AddPath(middleRight, x + 10 * gunit, y + -1 * gunit, x + 3 * gunit, y + -1 * gunit);
+			win.TrafficControl.AddPath(rightRight, x + 8 * gunit, y + -2 * gunit, x + 3 * gunit, y + -2 * gunit);
+			win.TrafficControl.AddPath(post1LeftRight, x + 3 * gunit, y + 0 * gunit, x + 1 * gunit, y + 0 * gunit);
+			win.TrafficControl.AddPath(post2LeftRight, x + 1 * gunit, y + 0 * gunit, x + -1 * gunit, y + 2 * gunit);
+			win.TrafficControl.AddPath(post1MiddleRight, x + 3 * gunit, y + -1 * gunit, x + -2 * gunit, y + -1 * gunit);
+			win.TrafficControl.AddPath(post2MiddleRight, x + -2 * gunit, y + -1 * gunit, x + -4 * gunit, y + -1 * gunit);
+			win.TrafficControl.AddPath(post3MiddleRight, x + -4 * gunit, y + -1 * gunit, x + -15 * gunit, y + -1 * gunit);
+			win.TrafficControl.AddPath(postRightRight, x + 3 * gunit, y + -2 * gunit, x + 1 * gunit, y + -4 * gunit);
 			
 			
 			th.Tick += delegate
