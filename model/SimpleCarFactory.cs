@@ -5,28 +5,25 @@ namespace vsts
 	{
 		public SimpleCarFactory ()
 		{
-			rand = new Random();
-			AccelerationMin = 1;
-			AccelerationMax = 3;
+			DecelerationDistance = 1;
 			Length = 1;
 			MaxSpeed = 13;
-			MinDistance = 10;
+			Acceleration = 13;
 		}
 		
-		public double AccelerationMin { get; set; }
-		public double AccelerationMax { get; set; }
 		public double Length { get; set; }
 		public double MaxSpeed { get; set; }
-		public double MinDistance { get; set; }
+		public double DecelerationDistance { get; set; }
+		public double Acceleration { get; set; }
 		
 		public IVehicle CreateVehicle()
 		{
 			var car = new SimpleCar() 
 			{ 
-				Acceleration = rand.NextDouble() * (AccelerationMax - AccelerationMin) + AccelerationMin, 
+				DecelerationDistance = DecelerationDistance,
 				Length = Length, 
 				MaxSpeed = MaxSpeed, 
-				MinDistance = MinDistance 
+				Acceleration = Acceleration
 			};
 			
 			car.SetRunning();

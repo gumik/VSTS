@@ -9,50 +9,36 @@ namespace vsts
 		
 		public double Length { get; set; }
 		public double MaxSpeed { get; set; }
-		public double MinDistance { get; set; }
 		public double Acceleration { get; set; }
-		
+		public double DecelerationDistance { get; set; }		
 		public string Name { get; set; }
 		
-		public double LookAhead { get { return MinDistance; } }
+		public double LookAhead 
+		{ 
+			get { return DecelerationDistance; }
+		}
 		
 		public void SetRunning()
 		{
 			actSpeed = MaxSpeed;
 		}
 		
-		public double Drive(double time, double obstacleDistance)
-		{
-			if (obstacleDistance > MinDistance) 
+		virtual public double Drive(double time, double obstacleDistance)
+		{	
+			var newSpeed = Math.Min((obstacleDistance / DecelerationDistance) * MaxSpeed, MaxSpeed);
+			if (newSpeed > actSpeed)
 			{
-				Accelerate(time);
-			}
-			else
-			{
-				Decelerate(obstacleDistance / MinDistance);
+				newSpeed = actSpeed + time * Acceleration;
 			}
 			
-			return Drive(time);
+			actSpeed = newSpeed;
+			
+			return actSpeed * time;
 		}
 		
 		public bool CanStop(double obstacleDistance)
 		{
-			return obstacleDistance >= MinDistance;
-		}
-		
-		private double Drive(double time)
-		{
-			return actSpeed * time;
-		}
-		
-		private void Accelerate(double time)
-		{
-			actSpeed = Math.Min(actSpeed + Acceleration * time, MaxSpeed);
-		}
-		
-		private void Decelerate(double obstacleDistance)
-		{
-			actSpeed = MaxSpeed * obstacleDistance;
+			return true;
 		}
 		
 		private double actSpeed;
