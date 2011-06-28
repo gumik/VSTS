@@ -7,15 +7,11 @@ namespace vsts
 	{
 		public StandardOutChooser (params double[] probs)
 		{
+			this.probs = probs;
 			rand = new Random();
 			range = new double[probs.Length];
 			
-			var sum = 0d;
-			for (int i = 0; i < probs.Length; ++i)
-			{
-				sum += probs[i];
-				range[i] = sum;
-			}
+			CalculateRange();
 		}
 		
 		public uint OutsNum { get { return (uint)range.Length; } }
@@ -34,6 +30,28 @@ namespace vsts
 			return (uint)(range.Length - 1);
 		}
 		
+		public void SetProbability(int index, double value)
+		{
+			probs[index] = value;
+			CalculateRange();
+		}
+		
+		public double GetProbability(int index)
+		{
+			return probs[index];
+		}
+		
+		private void CalculateRange()
+		{
+			var sum = 0d;
+			for (int i = 0; i < probs.Length; ++i)
+			{
+				sum += probs[i];
+				range[i] = sum;
+			}
+		}
+		
+		double[] probs;
 		double[] range;
 		Random rand;
 	}

@@ -14,6 +14,8 @@ namespace vsts
 			pathPosition = new Dictionary<Path, Tuple<Point, Point>>();
 		}
 		
+		public object Lock { get; set; }
+				
 		public void AddPath(Path path, int x1, int y1, int x2, int y2) 
 		{
 			pathPosition[path] = new Tuple<Point, Point>(new Point(x1, y1), new Point(x2, y2));
@@ -26,10 +28,13 @@ namespace vsts
 				
 		protected override bool OnExposeEvent (Gdk.EventExpose ev)
 		{
+			lock (Lock)
+			{
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (ev.Window)) {
 				int w, h;
 				ev.Window.GetSize (out w, out h);
 				Draw (cr, w, h);
+			}
 			}
 			
 			return true;
@@ -72,6 +77,13 @@ namespace vsts
 					cr.Rectangle(new Cairo.Rectangle(end.X - 6, end.Y - 6, 12, 12));
 					cr.Fill();
 					cr.SetSourceRGB(0, 0, 0);
+				}
+				else if (path is SourcePath)
+				{
+					var sourcePath = path as SourcePath;
+					cr.MoveTo(begin.X, begin.Y);
+					cr.TextPath(sourcePath.Queue.ToString());
+					cr.Fill();
 				}
 				
 				foreach (var vehicle in path.VehiclePosition.Keys)

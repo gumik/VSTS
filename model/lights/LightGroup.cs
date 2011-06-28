@@ -7,6 +7,7 @@ namespace vsts
 	{
 		public LightGroup (bool redFirst, params double[] times)
 		{
+			this.redFirst = redFirst;
 			red = !redFirst;
 			range = new double[times.Length];
 			paths = new List<BlockingPath>();
@@ -43,8 +44,8 @@ namespace vsts
 			
 			if (actual != newActual)
 			{
-				Console.WriteLine(String.Format("actual != newActual", time));
-				red = !red;
+				Console.WriteLine(newActual);
+				red = newActual % 2 == (redFirst ? 0 : 1);
 				foreach (var path in paths)
 				{
 					path.IsBlocked = red;
@@ -55,6 +56,7 @@ namespace vsts
 		}
 		
 		private bool red;
+		private bool redFirst;
 		private List<BlockingPath> paths;
 		private double[] range;
 		private int actual;

@@ -6,10 +6,11 @@ namespace vsts
 {
 	public class UpdateThread
 	{
-		public UpdateThread ()
+		public UpdateThread (object lok)
 		{
 			paths = new List<Path>();
 			systems = new List<LightSystem>();
+			_lock = lok;
 		}
 		
 		public int SleepTime { get; set; }
@@ -42,7 +43,10 @@ namespace vsts
 		{
 			while (run)
 			{
-				TickMethod((double)SleepTime / 1000);
+				lock (_lock)
+				{
+					TickMethod((double)SleepTime / 1000);
+				}
 				Thread.Sleep(SleepTime);
 			}
 		}
@@ -71,6 +75,7 @@ namespace vsts
 		private List<LightSystem> systems;
 		private bool run;
 		private Thread thread;
+		private object _lock;
 	}
 }
 

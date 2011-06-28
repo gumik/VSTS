@@ -84,6 +84,10 @@
     <Compile Include="model\lights\LightSystem.cs" />
     <Compile Include="model\lights\LightGroup.cs" />
     <Compile Include="Test.cs" />
+    <Compile Include="GUI\SourcePathControl.cs" />
+    <Compile Include="gtk-gui\vsts.SourcePathControl.cs" />
+    <Compile Include="GUI\StandardChooserControl.cs" />
+    <Compile Include="gtk-gui\vsts.StandardChooserControl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

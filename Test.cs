@@ -25,7 +25,7 @@ namespace vsts
 			path.OutputPaths[0] = terminatorPath;
 			
 			/////////////////////////////////
-			var th = new UpdateThread() { SleepTime = 32 };
+			var th = new UpdateThread(new object()) { SleepTime = 32 };
 			//th.AddPath(sourceDown);
 			th.AddPath(path);
 			
@@ -39,17 +39,6 @@ namespace vsts
 					Gdk.Rectangle r = new Gdk.Rectangle(0, 0, 1500, 1500);
 					win.GdkWindow.InvalidateRect(r, true);
 				});
-			};
-			
-			win.ButtonClicked += delegate {
-				if (car.MaxSpeed > 0)
-				{
-					car.MaxSpeed = 0;
-				}
-				else
-				{
-					car.MaxSpeed = 13;
-				}
 			};
 			
 			win.DeleteEvent += delegate { th.Stop(); };

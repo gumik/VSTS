@@ -9,6 +9,8 @@ namespace vsts
 			this.factory = factory;
 		}
 		
+		public uint Queue { get { return toAdd; } }
+		
 		public double AddTime { get; set; }
 		
 		public override void PreGo(double time) 

@@ -7,6 +7,7 @@ namespace vsts
 	{
 		public BlockingPath (double length) : base(length)
 		{
+			IsBlocked = true;
 		}
 		
 		public bool IsBlocked { get; set; }
