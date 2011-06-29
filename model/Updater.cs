@@ -4,15 +4,13 @@ using System.Threading;
 
 namespace vsts
 {
-	public class UpdateThread
+	public class Updater
 	{
-		public UpdateThread ()
+		public Updater ()
 		{
 			paths = new List<Path>();
 			systems = new List<LightSystem>();
 		}
-		
-		public uint SleepTime { get; set; }
 		
 		public void AddPath(Path path)
 		{
@@ -24,27 +22,11 @@ namespace vsts
 			systems.Add(system);
 		}
 		
-		public void Start()
-		{
-			run = true;
-			GLib.Timeout.Add(SleepTime, ThreadMethod);
-		}
+		public event Action Ticked = delegate { };
 		
-		public void Stop()
+		public void Tick(uint milis)
 		{
-			run = false;
-		}
-		
-		public event Action Tick = delegate { };
-		
-		private bool ThreadMethod()
-		{
-			TickMethod((double)SleepTime / 1000);
-			return run;
-		}
-		
-		internal void TickMethod(double time)
-		{
+			var time = ((double)milis / 1000);
 			foreach (var system in systems)
 			{
 				system.Tick(time);
@@ -60,12 +42,11 @@ namespace vsts
 				path.Go();
 			}
 						
-			Tick();
+			Ticked();
 		}
 		
 		private List<Path> paths;
 		private List<LightSystem> systems;
-		private bool run;
 	}
 }
 

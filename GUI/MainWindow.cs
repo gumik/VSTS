@@ -206,75 +206,70 @@ namespace vsts
 			groupLRL.AddPath(leftRight);
 			groupLRL.AddPath(leftLeft);
 			
-			var system = new LightSystem(12 
-			                             ,groupUD
-			                             ,groupUDL
-			                             ,groupLR 
-			                             ,groupLRL
-			                             );
+			var system = new LightSystem(12, groupUD, groupUDL, groupLR, groupLRL);
 			
-			th = new UpdateThread() { SleepTime = 33 };
+			updater = new Updater();
 			// Down
-			th.AddPath(sourceDown);
-			th.AddPath(multiDown);
-			th.AddPath(preLeftDown);
-			th.AddPath(preRightDown);
-			th.AddPath(leftDown);
-			th.AddPath(middleDown);
-			th.AddPath(rightDown);
-			th.AddPath(post1LeftDown);
-			th.AddPath(post2LeftDown);
-			th.AddPath(post1MiddleDown);
-			th.AddPath(post2MiddleDown);
-			th.AddPath(post3MiddleDown);
-			th.AddPath(postRightDown);
+			updater.AddPath(sourceDown);
+			updater.AddPath(multiDown);
+			updater.AddPath(preLeftDown);
+			updater.AddPath(preRightDown);
+			updater.AddPath(leftDown);
+			updater.AddPath(middleDown);
+			updater.AddPath(rightDown);
+			updater.AddPath(post1LeftDown);
+			updater.AddPath(post2LeftDown);
+			updater.AddPath(post1MiddleDown);
+			updater.AddPath(post2MiddleDown);
+			updater.AddPath(post3MiddleDown);
+			updater.AddPath(postRightDown);
 			
 			// Up
-			th.AddPath(sourceUp);
-			th.AddPath(multiUp);
-			th.AddPath(preLeftUp);
-			th.AddPath(preRightUp);
-			th.AddPath(leftUp);
-			th.AddPath(middleUp);
-			th.AddPath(rightUp);
-			th.AddPath(post1LeftUp);
-			th.AddPath(post2LeftUp);
-			th.AddPath(post1MiddleUp);
-			th.AddPath(post2MiddleUp);
-			th.AddPath(post3MiddleUp);
-			th.AddPath(postRightUp);
+			updater.AddPath(sourceUp);
+			updater.AddPath(multiUp);
+			updater.AddPath(preLeftUp);
+			updater.AddPath(preRightUp);
+			updater.AddPath(leftUp);
+			updater.AddPath(middleUp);
+			updater.AddPath(rightUp);
+			updater.AddPath(post1LeftUp);
+			updater.AddPath(post2LeftUp);
+			updater.AddPath(post1MiddleUp);
+			updater.AddPath(post2MiddleUp);
+			updater.AddPath(post3MiddleUp);
+			updater.AddPath(postRightUp);
 			
 			// Left
-			th.AddPath(sourceLeft);
-			th.AddPath(multiLeft);
-			th.AddPath(preLeftLeft);
-			th.AddPath(preRightLeft);
-			th.AddPath(leftLeft);
-			th.AddPath(middleLeft);
-			th.AddPath(rightLeft);
-			th.AddPath(post1LeftLeft);
-			th.AddPath(post2LeftLeft);
-			th.AddPath(post1MiddleLeft);
-			th.AddPath(post2MiddleLeft);
-			th.AddPath(post3MiddleLeft);
-			th.AddPath(postRightLeft);
+			updater.AddPath(sourceLeft);
+			updater.AddPath(multiLeft);
+			updater.AddPath(preLeftLeft);
+			updater.AddPath(preRightLeft);
+			updater.AddPath(leftLeft);
+			updater.AddPath(middleLeft);
+			updater.AddPath(rightLeft);
+			updater.AddPath(post1LeftLeft);
+			updater.AddPath(post2LeftLeft);
+			updater.AddPath(post1MiddleLeft);
+			updater.AddPath(post2MiddleLeft);
+			updater.AddPath(post3MiddleLeft);
+			updater.AddPath(postRightLeft);
 			
 			// Right
-			th.AddPath(sourceRight);
-			th.AddPath(multiRight);
-			th.AddPath(preLeftRight);
-			th.AddPath(preRightRight);
-			th.AddPath(leftRight);
-			th.AddPath(middleRight);
-			th.AddPath(rightRight);
-			th.AddPath(post1LeftRight);
-			th.AddPath(post2LeftRight);
-			th.AddPath(post1MiddleRight);
-			th.AddPath(post2MiddleRight);
-			th.AddPath(post3MiddleRight);
-			th.AddPath(postRightRight);
+			updater.AddPath(sourceRight);
+			updater.AddPath(multiRight);
+			updater.AddPath(preLeftRight);
+			updater.AddPath(preRightRight);
+			updater.AddPath(leftRight);
+			updater.AddPath(middleRight);
+			updater.AddPath(rightRight);
+			updater.AddPath(post1LeftRight);
+			updater.AddPath(post2LeftRight);
+			updater.AddPath(post1MiddleRight);
+			updater.AddPath(post2MiddleRight);
+			updater.AddPath(post3MiddleRight);
+			updater.AddPath(postRightRight);
 			
-			th.AddLightSystem(system);
+			updater.AddLightSystem(system);
 			
 			var x = 300;
 			var y = 500;
@@ -351,9 +346,8 @@ namespace vsts
 			standardchoosercontrolLeft.Chooser = chooserLeft;
 			standardchoosercontrolRight.Chooser = chooserRight;
 			
-			th.Tick += trafficcontrol1.QueueDraw;
+			updater.Ticked += trafficcontrol1.QueueDraw;
 			
-			DeleteEvent += delegate { th.Stop(); };
 			Show ();	
 		}
 		
@@ -363,18 +357,26 @@ namespace vsts
 		{
 			buttonStop.Sensitive = true;
 			buttonStart.Sensitive = false;
-			th.Start();
+			GLib.Timeout.Add(TickTime, UpdaterMethod);
+			run = true;
 		}
 		
 		protected virtual void OnButtonStopClicked (object sender, System.EventArgs e)
 		{			
 			buttonStop.Sensitive = false;
 			buttonStart.Sensitive = true;
-			th.Stop();
+			run = false;
 		}
 		
+		private bool UpdaterMethod()
+		{
+			updater.Tick(TickTime);
+			return run;
+		}
 		
-		private UpdateThread th;
+		private Updater updater;
+		private bool run;
+		private static uint TickTime = 33;
 	}
 
 }

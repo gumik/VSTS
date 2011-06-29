@@ -74,7 +74,6 @@
     <Compile Include="model\SourcePath.cs" />
     <Compile Include="GUI\TrafficControl.cs" />
     <Compile Include="gtk-gui\vsts.MainWindow.cs" />
-    <Compile Include="model\UpdateThread.cs" />
     <Compile Include="model\IVehicleFactory.cs" />
     <Compile Include="model\SimpleCarFactory.cs" />
     <Compile Include="model\MultiOutPath.cs" />
@@ -88,6 +87,7 @@
     <Compile Include="gtk-gui\vsts.SourcePathControl.cs" />
     <Compile Include="GUI\StandardChooserControl.cs" />
     <Compile Include="gtk-gui\vsts.StandardChooserControl.cs" />
+    <Compile Include="model\Updater.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
