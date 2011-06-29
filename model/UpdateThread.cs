@@ -6,14 +6,13 @@ namespace vsts
 {
 	public class UpdateThread
 	{
-		public UpdateThread (object lok)
+		public UpdateThread ()
 		{
 			paths = new List<Path>();
 			systems = new List<LightSystem>();
-			_lock = lok;
 		}
 		
-		public int SleepTime { get; set; }
+		public uint SleepTime { get; set; }
 		
 		public void AddPath(Path path)
 		{
@@ -28,8 +27,7 @@ namespace vsts
 		public void Start()
 		{
 			run = true;
-			thread = new Thread(new ThreadStart(ThreadMethod));
-			thread.Start();
+			GLib.Timeout.Add(SleepTime, ThreadMethod);
 		}
 		
 		public void Stop()
@@ -39,16 +37,10 @@ namespace vsts
 		
 		public event Action Tick = delegate { };
 		
-		private void ThreadMethod()
+		private bool ThreadMethod()
 		{
-			while (run)
-			{
-				lock (_lock)
-				{
-					TickMethod((double)SleepTime / 1000);
-				}
-				Thread.Sleep(SleepTime);
-			}
+			TickMethod((double)SleepTime / 1000);
+			return run;
 		}
 		
 		internal void TickMethod(double time)
@@ -74,8 +66,6 @@ namespace vsts
 		private List<Path> paths;
 		private List<LightSystem> systems;
 		private bool run;
-		private Thread thread;
-		private object _lock;
 	}
 }
 

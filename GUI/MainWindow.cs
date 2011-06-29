@@ -213,9 +213,7 @@ namespace vsts
 			                             ,groupLRL
 			                             );
 			
-			var lok = new object();
-			TrafficControl.Lock = lok;
-			th = new UpdateThread(lok) { SleepTime = 32 };
+			th = new UpdateThread() { SleepTime = 33 };
 			// Down
 			th.AddPath(sourceDown);
 			th.AddPath(multiDown);
@@ -353,14 +351,7 @@ namespace vsts
 			standardchoosercontrolLeft.Chooser = chooserLeft;
 			standardchoosercontrolRight.Chooser = chooserRight;
 			
-			th.Tick += delegate
-			{ 
-				Gtk.Application.Invoke(delegate
-				{
-					Gdk.Rectangle r = new Gdk.Rectangle(0, 0, 1500, 1500);
-					 GdkWindow.InvalidateRect(r, true);
-				});
-			};
+			th.Tick += trafficcontrol1.QueueDraw;
 			
 			DeleteEvent += delegate { th.Stop(); };
 			Show ();	

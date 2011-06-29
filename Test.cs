@@ -25,7 +25,7 @@ namespace vsts
 			path.OutputPaths[0] = terminatorPath;
 			
 			/////////////////////////////////
-			var th = new UpdateThread(new object()) { SleepTime = 32 };
+			var th = new UpdateThread() { SleepTime = 32 };
 			//th.AddPath(sourceDown);
 			th.AddPath(path);
 			

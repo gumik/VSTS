@@ -5,10 +5,10 @@ namespace vsts
 	{
 		public SimpleCarFactory ()
 		{
-			DecelerationDistance = 1;
+			DecelerationDistance = 2;
 			Length = 1;
 			MaxSpeed = 13;
-			Acceleration = 13;
+			Acceleration = 8;
 		}
 		
 		public double Length { get; set; }
@@ -29,8 +29,6 @@ namespace vsts
 			car.SetRunning();
 			return car;
 		}
-		
-		private Random rand;
 	}
 }
 

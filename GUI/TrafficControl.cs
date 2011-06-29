@@ -13,8 +13,6 @@ namespace vsts
 		{
 			pathPosition = new Dictionary<Path, Tuple<Point, Point>>();
 		}
-		
-		public object Lock { get; set; }
 				
 		public void AddPath(Path path, int x1, int y1, int x2, int y2) 
 		{
@@ -28,13 +26,10 @@ namespace vsts
 				
 		protected override bool OnExposeEvent (Gdk.EventExpose ev)
 		{
-			lock (Lock)
-			{
 			using (Cairo.Context cr = Gdk.CairoHelper.Create (ev.Window)) {
 				int w, h;
 				ev.Window.GetSize (out w, out h);
 				Draw (cr, w, h);
-			}
 			}
 			
 			return true;
