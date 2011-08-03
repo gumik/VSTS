@@ -271,8 +271,8 @@ namespace vsts
 			
 			updater.AddLightSystem(system);
 			
-			var x = 300;
-			var y = 500;
+			var x = 250;
+			var y = 250;
 			var gunit = 15;
 			
 			// Down
